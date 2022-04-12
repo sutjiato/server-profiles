@@ -1,1 +1,7 @@
 dsconfig set-global-configuration-prop --set "replication-set-name:entry-balancing-set-1"
+
+dsconfig create-backend \
+	--backend-name userBackend \
+	--type local-db \
+	--set enabled:true \
+	--set base-dn:ou=people,dc=example,dc=com
