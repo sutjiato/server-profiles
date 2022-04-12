@@ -1,0 +1,1 @@
+dsconfig set-global-configuration-prop --set "replication-set-name:entry-balancing-set-1"
