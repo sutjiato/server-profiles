@@ -139,4 +139,20 @@ echo "Replication initialize result=${_replInitResult}"
 
 test ${_replInitResult} -eq 0 && set_server_available online && dsreplication status --displayServerTable --showAll
 
+#
+#- * Initialize replication on entry balancing set
+#
+echo "Initializing replication on POD Server"
+dsreplication initialize \
+    --retryTimeoutSeconds "${RETRY_TIMEOUT_SECONDS}" \
+    --trustAll \
+    --topologyFilePath "${TOPOLOGY_FILE}" \
+    --hostDestination "${POD_HOSTNAME}" --portDestination "${POD_LDAPS_PORT}" --useSSLDestination \
+    --baseDN "ou=people,${USER_BASE_DN}" \
+    --adminUID "${ADMIN_USER_NAME}" \
+    --adminPasswordFile "${ADMIN_USER_PASSWORD_FILE}" \
+    --no-prompt \
+    --enableDebug \
+    --globalDebugLevel verbose
+
 exit ${_replInitResult}
