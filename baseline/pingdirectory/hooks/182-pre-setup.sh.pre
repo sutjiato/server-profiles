@@ -22,3 +22,8 @@ else
     echo_red "ERROR: the base is expected to be dc=<your domain> or o=<your org>"
     exit 183
 fi
+
+SHORT_HOST_NAME=${hostname}
+ORDINAL=${SHORT_HOST_NAME##*-}
+REMAIN=$((${ORDINAL} % 2))
+export ENTRY_BALANCING_SET=${REMAIN}
