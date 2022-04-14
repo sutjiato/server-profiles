@@ -74,6 +74,33 @@ if test ${_replEnableResult} -ne 0; then
     exit ${_replEnableResult}
 fi
 
+echo "Enable replication on entry balancing set"
+
+dsreplication enable \
+    --retryTimeoutSeconds "${RETRY_TIMEOUT_SECONDS}" \
+    --trustAll \
+    --host1 "${MASTER_TOPOLOGY_HOSTNAME}" \
+    --port1 "${MASTER_TOPOLOGY_LDAPS_PORT}" \
+    --useSSL1 \
+    --replicationPort1 "${MASTER_TOPOLOGY_REPLICATION_PORT}" \
+    --bindDN1 "${ROOT_USER_DN}" \
+    --bindPasswordFile1 "${ROOT_USER_PASSWORD_FILE}" \
+    \
+    --host2 "${POD_HOSTNAME}" \
+    --port2 "${POD_LDAPS_PORT}" \
+    --useSSL2 \
+    --replicationPort2 "${_podReplicationPort}" \
+    --bindDN2 "${ROOT_USER_DN}" \
+    --bindPasswordFile2 "${ROOT_USER_PASSWORD_FILE}" \
+    \
+    --adminUID "${ADMIN_USER_NAME}" \
+    --adminPasswordFile "${ADMIN_USER_PASSWORD_FILE}" \
+    --no-prompt --ignoreWarnings \
+    --baseDN "ou=people,${USER_BASE_DN}" \
+    --noSchemaReplication \
+    --restricted "ou=people,dc=example,dc=com" \
+    --enableDebug --globalDebugLevel verbose
+
 #
 #- * Get the new current topology
 #
