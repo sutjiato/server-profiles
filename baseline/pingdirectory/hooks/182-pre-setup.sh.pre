@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
 . "${HOOKS_DIR}/pingcommon.lib.sh"
-. "${HOOKS_DIR}/utils.lib.sh"
 
 echo Hello from the baseline server profile 182-pre-setup.sh.pre hook!
 echo "====> USER_BASE_DN=[${USER_BASE_DN}]"
