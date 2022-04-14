@@ -1,5 +1,5 @@
 dsconfig set-global-configuration-prop \
-	--set "replication-set-name:entry-balancing-set-${ENTRY_BALANCING_SET}"
+	--set "replication-set-name:entry-balancing-set-0"
 
 #dsconfig create-backend \
 #	--backend-name userBackend \
