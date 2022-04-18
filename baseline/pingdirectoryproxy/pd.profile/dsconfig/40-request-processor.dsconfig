@@ -1,6 +1,25 @@
 dsconfig create-request-processor \
-    --processor-name pingdirectory \
+    --processor-name non_entry_balancing_req_processor \
     --type proxying \
-    --set load-balancing-algorithm:pingdirectory \
+    --set load-balancing-algorithm:pd_lba \
     --set transformation:remove-description \
     --set transformation:description
+
+dsconfig create-request-processor \
+    --type proxying \
+    --processor-name ou_people_dc_example_dc_com_entry_balancing_set_0_req_processor \
+    --set load-balancing-algorithm:pd_entry_balancing_set_0_lba
+
+dsconfig create-request-processor \
+    --type proxying \
+    --processor-name ou_people_dc_example_dc_com_entry_balancing_set_1_req_processor \
+    --set load-balancing-algorithm:pd_entry_balancing_set_1_lba
+
+dsconfig create-request-processor \
+    --type entry-balancing \
+    --processor-name ou_people_dc_example_dc_com_entry_balancing_req_processor \
+    --set subordinate-request-processor:ou_people_dc_example_dc_com_entry_balancing_set_0_req_processor \
+    --set subordinate-request-processor:ou_people_dc_example_dc_com_entry_balancing_set_1_req_processor \
+    --set entry-balancing-base-dn:ou=people,dc=example,dc=com \
+    --set prime-rdn-index:true \
+    --set broadcast-updates-above-balancing-point:false

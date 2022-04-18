@@ -1,4 +1,14 @@
+#dsconfig create-subtree-view \
+#    --view-name pingdirectory  \
+#    --set base-dn:${USER_BASE_DN}  \
+#    --set request-processor:pingdirectory
+
 dsconfig create-subtree-view \
-    --view-name pingdirectory  \
-    --set base-dn:${USER_BASE_DN}  \
-    --set request-processor:pingdirectory
+    --view-name dc_example_dc_com_view \
+    --set base-dn:dc=example,dc=com \
+    --set request-processor:non_entry_balancing_req_processor
+
+dsconfig create-subtree-view \
+    --view-name ou_people_dc_example_dc_com_view \
+    --set base-dn:ou=people,dc=example,dc=com \
+    --set request-processor:ou_people_dc_example_dc_com_entry_balancing_req_processor

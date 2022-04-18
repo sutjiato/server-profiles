@@ -1,3 +1,4 @@
 dsconfig set-client-connection-policy-prop \
     --policy-name default  \
-    --set subtree-view:pingdirectory
+    --add subtree-view:dc_example_dc_com_view \
+    --add subtree-view:ou_people_dc_example_dc_com_view

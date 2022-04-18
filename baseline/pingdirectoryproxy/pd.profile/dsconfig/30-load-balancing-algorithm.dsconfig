@@ -1,5 +1,28 @@
+#dsconfig create-load-balancing-algorithm \
+#    --algorithm-name pingdirectory \
+#    --type fewest-operations \
+#    --set enabled:true \
+#    --set backend-server:pingdirectory
+
 dsconfig create-load-balancing-algorithm \
-    --algorithm-name pingdirectory \
+    --algorithm-name pd_lba \
     --type fewest-operations \
     --set enabled:true \
-    --set backend-server:pingdirectory
+    --set backend-server:pingdirectory-0 \
+    --set backend-server:pingdirectory-1 \
+    --set backend-server:pingdirectory-2 \
+    --set backend-server:pingdirectory-3
+
+dsconfig create-load-balancing-algorithm \
+    --algorithm-name pd_entry_balancing_set_0_lba \
+    --type fewest-operations \
+    --set enabled:true \
+    --set backend-server:pingdirectory-0 \
+    --set backend-server:pingdirectory-2
+
+dsconfig create-load-balancing-algorithm \
+    --algorithm-name pd_entry_balancing_set_1_lba \
+    --type fewest-operations \
+    --set enabled:true \
+    --set backend-server:pingdirectory-1 \
+    --set backend-server:pingdirectory-3

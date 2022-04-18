@@ -1,0 +1,6 @@
+dsconfig create-placement-algorithm \
+    --processor-name ou_people_dc_example_dc_com_entry_balancing_req_processor \
+    --algorithm-name entry-count \
+    --type entry-counter \
+    --set enabled:true
+
